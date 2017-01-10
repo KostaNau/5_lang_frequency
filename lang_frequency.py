@@ -1,7 +1,6 @@
 import collections
 import re
 import argparse
-import time
 
 
 BUFFER_SIZE = 0x1000
