@@ -3,30 +3,23 @@ import re
 import argparse
 
 
-BUFFER_SIZE = 0x1000
 ENCODING = 'utf-8'
 RE_PATTERN = r'[^\W|\d]+'
-
-
-def read_file_buffer(file):
-  flow = True
-  while flow:
-    flow = file.read(BUFFER_SIZE)
-    yield flow
 
 
 def load_all_words(input_filepath):
     all_words_list = []
     with open(input_filepath, 'r', encoding=ENCODING) as input_file:
-        for line in read_file_buffer(input_file):
+        for line in input_file:
             word_stack = re.findall(RE_PATTERN, line)
             for word in word_stack:
-                all_words_list.append(word)
+                all_words_list.append(word.lower())
     return all_words_list
 
 
 def get_most_frequent_word(word_list):
-    most_frequent = collections.Counter(word_list).most_common(10)
+    amount_output_words = 10
+    most_frequent = collections.Counter(word_list).most_common(amount_output_words)
     return most_frequent
 
 
@@ -37,4 +30,7 @@ if __name__ == '__main__':
     input_file_path = args.text_file
 
     word_list = load_all_words(input_file_path)
-    print(get_most_frequent_word(word_list))
+    most_frequent_words = get_most_frequent_word(word_list)
+    print('10 Most frequent words:', end='\n')
+    for word in most_frequent_words:
+        print('Word "{}" meets: {} times.'.format(word[0], word[1]))
