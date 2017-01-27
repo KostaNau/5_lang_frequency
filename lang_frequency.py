@@ -6,11 +6,11 @@ import argparse
 ENCODING = 'utf-8'
 RE_PATTERN = r'[^\W|\d]+'
 
+
 def load_input_file(filepath):
-    # text_data = None
     with open(filepath, 'r', encoding=ENCODING) as input_file:
         text_data = input_file.readlines()
-    return text_data
+        return text_data
 
 
 def find_all_words(text):
