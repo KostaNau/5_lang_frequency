@@ -9,16 +9,15 @@ RE_PATTERN = r'[^\W|\d]+'
 
 def load_input_file(filepath):
     with open(filepath, 'r', encoding=ENCODING) as input_file:
-        text_data = input_file.readlines()
+        text_data = input_file.read()
         return text_data
 
 
 def find_all_words(text):
     all_words_list = []
-    for line in text:
-        word_stack = re.findall(RE_PATTERN, line)
-        for word in word_stack:
-            all_words_list.append(word.lower())
+    word_stack = re.findall(RE_PATTERN, text.lower())
+    for word in word_stack:
+        all_words_list.append(word)
     return all_words_list
 
 
@@ -29,7 +28,7 @@ def get_most_frequent_word(word_list):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Most frequen word_stack')
+    parser = argparse.ArgumentParser(description='Most frequent word_stack')
     parser.add_argument('text_file', help="path to any text file or filename for current directory")
     args = parser.parse_args()
     input_file_path = args.text_file
