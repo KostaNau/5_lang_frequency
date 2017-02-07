@@ -14,10 +14,7 @@ def load_input_file(filepath):
 
 
 def find_all_words(text):
-    all_words_list = []
-    word_stack = re.findall(RE_PATTERN, text.lower())
-    for word in word_stack:
-        all_words_list.append(word)
+    all_words_list = [word for word in re.findall(RE_PATTERN, text.lower())]
     return all_words_list
 
 
